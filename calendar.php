@@ -20,12 +20,17 @@
         padding:10px;
     }
     table td:hover{
-        background:#ccc;
+        background:#7eb0e6;
+    }
+    body{
+        background-image:url(https://bit.ly/32le9i7 );
+        background-repeat:no-repeat;
+        background-size: 100vw 100vh;
+
     }
     </style>
 </head>
-<body>
-
+<body class="">
     
 <?php
 
@@ -68,22 +73,25 @@
     $allDay =date("t",$firstDay);
     $startDay=date("w",$firstDay);
 
-
-?>
-    <div align="center" valign="center" >
-    <h1>萬年曆</h1>
-    </div>
-    <div align="center" valign="center" >
-        <h6><?=$toYear;?>年<?=$toMonth;?>月</h6>
-    </div>
-    <div class='d-flex justify-content-between  m-auto' style="width:750px" >
-        <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>">Last</a>
-        <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>">Next</a>
-    </div>
-
-
-<table>
+?> 
+    <div class="bg-dark text-white  rounded border border-primary p-3 container " style="box-shadow:10px 10px 10px #111; margin:150px ">
+        <div align="center" valign="center" >
+            <h1>萬年曆</h1>
+        </div>
+        <div align="center" valign="center" >
+            <h6><?=$toYear;?>年<?=$toMonth;?>月</h6>
+        </div>
+        <div class="row justify-content-around">
+        <div class='col-auto' >
+            <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>">上個月</a>
+            </div>
+            <div class='col-auto' >
+            <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>">下個月</a>
+            </div>
+        </div>
+<table class="col">
     <tr>
+        <td rowspan="7" class="p-0" style="width:150px; height:300px;" ><img src="https://picsum.photos/150/300/?random=1"></td>
         <td>日</td>
         <td>一</td>
         <td>二</td>
@@ -124,9 +132,10 @@
         }
         echo "</tr>";
     }
-
+    
 ?>
 </table>
 
+</div>
 </body>
 </html>
