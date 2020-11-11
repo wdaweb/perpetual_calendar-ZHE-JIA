@@ -233,7 +233,7 @@
         </div>
 <table class="col-12 " >
     <tr>
-        <td rowspan="7" class="p-0" style="width:150px; height:300px;" ><img src="https://picsum.photos/150/300/?random=1"></td>
+        <td rowspan="7" class="p-0 " style="width:150px; height:300px;" ><img src="https://picsum.photos/187/390/?random=1"></td>
         <td >日</td>
         <td >一</td>
         <td >二</td>
@@ -271,11 +271,11 @@
                 $holimonth=$toMonth;
                 $holiday=(($i*7) + ($j+1))-$startDay;
                 if($j==0 || $j==6 || ($holimonth==12 && $holiday ==25) ||($holimonth==10 && $holiday ==11) || ($holimonth==10 && $holiday ==25) || ($holimonth==6 && $holiday ==25) ||($holimonth==5 && $holiday ==1) || ($holimonth==3 && $holiday ==8) || ($holimonth==2 && $holiday ==8) || ($holimonth==1 && $holiday ==24) || ($holimonth==1 && $holiday ==25)) {
-                    echo "<td class='tdColor' style='width:100px; height:69px'>";
+                    echo "<td class='tdColor' style='width:125px; height:69px'>";
                     echo (($i*7) + ($j+1))-$startDay;
 
                 }else{
-                    echo "<td style='width:100px; height:69px'>";
+                    echo "<td style='width:125px; height:69px'>";
                     echo (($i*7) + ($j+1))-$startDay;
                     
                 }
