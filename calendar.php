@@ -231,16 +231,16 @@
             <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>" class="btn btn-primary btn-sm">下個月</a>
             </div>
         </div>
-<table class="col-12 ">
+<table class="col-12 " >
     <tr>
         <td rowspan="7" class="p-0" style="width:150px; height:300px;" ><img src="https://picsum.photos/150/300/?random=1"></td>
-        <td>日</td>
-        <td>一</td>
-        <td>二</td>
-        <td>三</td>
-        <td>四</td>
-        <td>五</td>
-        <td>六</td>
+        <td >日</td>
+        <td >一</td>
+        <td >二</td>
+        <td >三</td>
+        <td >四</td>
+        <td >五</td>
+        <td >六</td>
     </tr>
 <?php
 
@@ -252,6 +252,7 @@
     }else if($startDay + $allDay >35 && $startDay + $allDay <=42 ){
         $week =6;
     }
+    
     //計算日期數字
     for($i=0; $i<$week ;$i++){
 
@@ -267,12 +268,36 @@
                 echo "&nbsp";
             }
             else{
-                if($j==0 || $j==6){
-                    echo "<td class='tdColor'>";
+                $holimonth=$toMonth;
+                $holiday=(($i*7) + ($j+1))-$startDay;
+                if($j==0 || $j==6 || ($holimonth==12 && $holiday ==25) ||($holimonth==10 && $holiday ==11) || ($holimonth==10 && $holiday ==25) || ($holimonth==6 && $holiday ==25) ||($holimonth==5 && $holiday ==1) || ($holimonth==3 && $holiday ==8) || ($holimonth==2 && $holiday ==8) || ($holimonth==1 && $holiday ==24) || ($holimonth==1 && $holiday ==25)) {
+                    echo "<td class='tdColor' style='width:100px; height:69px'>";
                     echo (($i*7) + ($j+1))-$startDay;
+
                 }else{
-                    echo "<td>";
-                echo (($i*7) + ($j+1))-$startDay;
+                    echo "<td style='width:100px; height:69px'>";
+                    echo (($i*7) + ($j+1))-$startDay;
+                    
+                }
+
+                if($holimonth==10 && $holiday ==11){
+                    echo "<br>國慶日";
+                }else if($holimonth==12 && $holiday ==25){
+                    echo "<br>聖誕日";
+                }else if($holimonth==10 && $holiday ==25){
+                    echo "<br>重陽節";
+                }else if($holimonth==6 && $holiday ==25){
+                    echo "<br>端午節";
+                }else if($holimonth==5 && $holiday ==1){
+                    echo "<br>勞動節";
+                }else if($holimonth==3 && $holiday ==8){
+                    echo "<br>婦女節";
+                }else if($holimonth==2 && $holiday ==8){
+                    echo "<br>除夕";
+                }else if($holimonth==1 && $holiday ==25){
+                    echo "<br>春節";
+                }else if($holimonth==1 && $holiday ==24){
+                    echo "<br>除節";
                 }
             }
 
