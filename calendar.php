@@ -253,6 +253,7 @@
         $week =6;
     }
     //計算日期數字
+    $nextAllday=1;
     for($i=0; $i<$week ;$i++){
 
         echo "<tr>";
@@ -264,13 +265,15 @@
                 //空白填入上個月數字
                 echo "<td class='text-secondary' style='width:125px; height:69px'>";
                 $tmpDay=date("t",strtotime($lastYear."-".$lastMonth."-".'1'));
-                $overday=$tmpDay-$startDay+$j;
+                $lastAllday=$j+1;
+                $overday=$tmpDay-$startDay+$lastAllday;
                 echo "$overday";
 
             }else if(($i*7) + ($j+1)-$startDay>$allDay){
                 //空白填入下個月數字            
                 echo "<td class='text-secondary' style='width:125px; height:69px'>";
-                echo "$j";
+                echo "$nextAllday";
+                    $nextAllday++;
 
             }
             else{
