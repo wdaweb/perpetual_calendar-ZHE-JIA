@@ -33,7 +33,7 @@
 <body class="">
     
 <?php
-
+    //上下月
     if(isset($_GET['month']) || isset($_GET['year'])){
 
 
@@ -61,6 +61,34 @@
             $lastYear=$toYear;
     
         }
+        //選單列表
+    }else if(isset($_POST['chooseyear']) || isset($_POST['choosemonth'])){
+
+        $toYear=$_POST['chooseyear'];
+        $toMonth=$_POST['choosemonth'];
+
+        if($toMonth >= 12){
+            $nextMonth=1;
+            $nextYear=$toYear+1;
+    
+        }
+        else{
+            $nextMonth=$toMonth+1;
+            $nextYear=$toYear;
+    
+        }
+        
+    
+        if($toMonth <=1){
+            $lastMonth=12;
+            $lastYear=$toYear-1;
+    
+        }else {
+            $lastMonth=$toMonth-1;
+            $lastYear=$toYear;
+    
+        }
+        //輸入年月
     }else if(isset($_POST['thisYear'] ) || isset($_POST['thisMonth'])) {
 
         //避免其中一個年或月沒輸入
@@ -125,19 +153,54 @@
         <div align="center" valign="center" >
             <h6 class="col-12"><?=$toYear;?>年<?=$toMonth;?>月</h6>
         </div>
+
+        <!-- 輸入年月表單 -->
         <h5 class="col-12">請輸入年月</h5>
         <form class="col-12" action="calendar.php" method="post">
-            <p ><input type="text" name="thisYear" >年</p>
-            <p ><input type="text" name="thisMonth" >月</p>
-            <input type="submit" value="確認">
+            <p ><input type="text" name="thisYear" > 年</p>
+            <p ><input type="text" name="thisMonth" > 月</p>
+            <input type="submit" value="確認" class="btn btn-primary btn-sm">
+            <input type="reset" value="重置" class="btn btn-primary btn-sm">
         </form>
 
+        <br>
+
+        <!-- 選擇年月表單 -->
+        <form action="calendar.php" method="post" class="col-12">
+        <p><select name="chooseyear" >
+        <?php
+            for($i=date("Y"); $i>=1;$i--){
+                echo "<option>";
+                echo $i;
+                
+            }        
+                echo "</option>";
+        ?>
+        </select>
+                年
+        <select name="choosemonth" >
+        
+            <?php
+
+                for($i=12; $i>=1;$i--){
+                    echo "<option>";
+                    echo "$i";
+                }
+                    echo "</option>";
+            ?>
+        </select>
+                    月
+        </p>
+                <input type="submit" value="確認" class="btn btn-primary btn-sm">
+        </form>
+
+            <!-- 上下月表單 -->
         <div class="row justify-content-around">
         <div class='col-auto' >
-            <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>">上個月</a>
+            <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>" class="btn btn-primary btn-sm">上個月</a>
             </div>
             <div class='col-auto' >
-            <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>">下個月</a>
+            <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>" class="btn btn-primary btn-sm">下個月</a>
             </div>
         </div>
 <table class="col-12 ">
