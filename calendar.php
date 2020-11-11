@@ -23,7 +23,7 @@
         background:#7eb0e6;
     }
     body{
-        background-image:url(https://bit.ly/32le9i7 );
+        background-image:url(a1.jpg);
         background-repeat:no-repeat;
         background-size: 100vw 100vh;
 
@@ -34,53 +34,104 @@
     
 <?php
 
-
-
     if(isset($_GET['month']) || isset($_GET['year'])){
+
+
         $toMonth=$_GET['month'];
         $toYear=$_GET['year'];
+
+        if($toMonth >= 12){
+            $nextMonth=1;
+            $nextYear=$toYear+1;
+    
+        }
+        else{
+            $nextMonth=$toMonth+1;
+            $nextYear=$toYear;
+    
+        }
+        
+    
+        if($toMonth <=1){
+            $lastMonth=12;
+            $lastYear=$toYear-1;
+    
+        }else {
+            $lastMonth=$toMonth-1;
+            $lastYear=$toYear;
+    
+        }
+    }else if(isset($_POST['thisYear'] ) || isset($_POST['thisMonth'])) {
+
+        //避免其中一個年或月沒輸入
+        if(!empty($_POST['thisYear'])){
+            $toYear=$_POST['thisYear'];
+        }else {
+            $toYear=date("Y");
+        }
+        if(!empty($_POST['thisMonth'])){
+            if($_POST['thisMonth']>12){
+                $toMonth=$_POST['thisMonth'] %12 ;   //月份超過12算超過月份
+            }else{
+                $toMonth=$_POST['thisMonth'];
+            }
+            
+        }else {
+            $toMonth=date("m");
+        }
+
+
+
+        if($toMonth >= 12){
+            $nextMonth=1;
+            $nextYear=$toYear+1;
+    
+        }
+        else{
+            $nextMonth=$toMonth+1;
+            $nextYear=$toYear;
+    
+        }
+        
+    
+        if($toMonth <=1){
+            $lastMonth=12;
+            $lastYear=$toYear-1;
+    
+        }else {
+            $lastMonth=$toMonth-1;
+            $lastYear=$toYear;
+    
+        }
+
     }else {
         $toYear=date("Y");
         $toMonth=date("m");
 
     }
     
-    if($toMonth >= 12){
-        $nextMonth=1;
-        $nextYear=$toYear+1;
 
-    }
-    else{
-        $nextMonth=$toMonth+1;
-        $nextYear=$toYear;
-
-    }
-    
-
-    if($toMonth <=1){
-        $lastMonth=12;
-        $lastYear=$toYear-1;
-
-    }else {
-        $lastMonth=$toMonth-1;
-        $lastYear=$toYear;
-
-    }
-        // echo "這年 $toYear";
-        // echo "這個月測試 $toMonth";
     $allDaylast=date("t");
     $firstDay=strtotime($toYear."-".$toMonth."-".'1');
     $allDay =date("t",$firstDay);
     $startDay=date("w",$firstDay);
 
 ?> 
-    <div class="bg-dark text-white  rounded border border-primary p-3 container " style="box-shadow:10px 10px 10px #111; margin:150px ">
+    <div class="container ">
+    <div class="bg-dark text-white  rounded border border-primary p-3 col-12 mt-5 " style="box-shadow:10px 10px 10px #111; ">
         <div align="center" valign="center" >
             <h1>萬年曆</h1>
         </div>
         <div align="center" valign="center" >
-            <h6><?=$toYear;?>年<?=$toMonth;?>月</h6>
+            <h6 class="col-12"><?=$toYear;?>年<?=$toMonth;?>月</h6>
         </div>
+        <h5 class="col-12">請輸入年月</h5>
+        <form class="col-12" action="calendar.php" method="post">
+            <p ><input type="text" name="thisYear" >年</p>
+            <p ><input type="text" name="thisMonth" >月</p>
+            <input type="submit" value="確認">
+        </form>
+
         <div class="row justify-content-around">
         <div class='col-auto' >
             <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>">上個月</a>
@@ -89,7 +140,7 @@
             <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>">下個月</a>
             </div>
         </div>
-<table class="col">
+<table class="col-12 ">
     <tr>
         <td rowspan="7" class="p-0" style="width:150px; height:300px;" ><img src="https://picsum.photos/150/300/?random=1"></td>
         <td>日</td>
@@ -102,7 +153,7 @@
     </tr>
 <?php
 
-    
+    //算表格數量 避免td過多
     if($startDay + $allDay <=28){
         $week =4;
     }else if($startDay + $allDay >28 && $startDay + $allDay <=35 ){
@@ -110,7 +161,7 @@
     }else if($startDay + $allDay >35 && $startDay + $allDay <=42 ){
         $week =6;
     }
-
+    //計算日期數字
     for($i=0; $i<$week ;$i++){
 
         echo "<tr>";
@@ -123,7 +174,6 @@
                 echo "&nbsp";
             }
             else{
-
                 echo (($i*7) + ($j+1))-$startDay;
             }
 
@@ -136,6 +186,7 @@
 ?>
 </table>
 
+</div>
 </div>
 </body>
 </html>
