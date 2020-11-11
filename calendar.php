@@ -28,6 +28,12 @@
         background-size: 100vw 100vh;
 
     }
+    .tdColor{
+        color:#f00;
+        background:#424757;
+        
+
+    }
     </style>
 </head>
 <body class="">
@@ -251,15 +257,23 @@
 
         echo "<tr>";
         for($j=0;$j<7;$j++){
-            echo "<td>";
+
+            
 
             if($i==0 && $j<$startDay){
-                
+                echo "<td>";
             }else if(($i*7) + ($j+1)-$startDay>$allDay){
-                
+                echo "<td>";
+                echo "&nbsp";
             }
             else{
+                if($j==0 || $j==6){
+                    echo "<td class='tdColor'>";
+                    echo (($i*7) + ($j+1))-$startDay;
+                }else{
+                    echo "<td>";
                 echo (($i*7) + ($j+1))-$startDay;
+                }
             }
 
             echo "</td>";
