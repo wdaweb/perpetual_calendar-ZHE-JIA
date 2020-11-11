@@ -252,7 +252,6 @@
     }else if($startDay + $allDay >35 && $startDay + $allDay <=42 ){
         $week =6;
     }
-    
     //計算日期數字
     for($i=0; $i<$week ;$i++){
 
@@ -262,10 +261,17 @@
             
 
             if($i==0 && $j<$startDay){
-                echo "<td>";
+                //空白填入上個月數字
+                echo "<td class='text-secondary' style='width:125px; height:69px'>";
+                $tmpDay=date("t",strtotime($lastYear."-".$lastMonth."-".'1'));
+                $overday=$tmpDay-$startDay+$j;
+                echo "$overday";
+
             }else if(($i*7) + ($j+1)-$startDay>$allDay){
-                echo "<td>";
-                echo "&nbsp";
+                //空白填入下個月數字            
+                echo "<td class='text-secondary' style='width:125px; height:69px'>";
+                echo "$j";
+
             }
             else{
                 $holimonth=$toMonth;
