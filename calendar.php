@@ -136,6 +136,28 @@
         $toYear=date("Y");
         $toMonth=date("m");
 
+        if($toMonth >= 12){
+            $nextMonth=1;
+            $nextYear=$toYear+1;
+    
+        }
+        else{
+            $nextMonth=$toMonth+1;
+            $nextYear=$toYear;
+    
+        }
+        
+    
+        if($toMonth <=1){
+            $lastMonth=12;
+            $lastYear=$toYear-1;
+    
+        }else {
+            $lastMonth=$toMonth-1;
+            $lastYear=$toYear;
+    
+        }
+
     }
     
 
@@ -234,7 +256,7 @@
             if($i==0 && $j<$startDay){
                 
             }else if(($i*7) + ($j+1)-$startDay>$allDay){
-                echo "&nbsp";
+                
             }
             else{
                 echo (($i*7) + ($j+1))-$startDay;
