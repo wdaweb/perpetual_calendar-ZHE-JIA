@@ -184,9 +184,9 @@
 
         <!-- 輸入年月表單 -->
         <h5 class="col-12">請輸入年月</h5>
-        <form class="col-12" action="calendar.php" method="post">
-            <p ><input type="text" name="thisYear" > 年</p>
-            <p ><input type="text" name="thisMonth" > 月</p>
+        <form class="col-12" action="index.php" method="post">
+            <p ><input type="text" name="thisYear" value=""> 年</p>
+            <p ><input type="text" name="thisMonth" value=""> 月</p>
             <input type="submit" value="確認" class="btn btn-primary btn-sm">
             <input type="reset" value="重置" class="btn btn-primary btn-sm">
         </form>
@@ -194,7 +194,7 @@
         <br>
 
         <!-- 選擇年月表單 -->
-        <form action="calendar.php" method="post" class="col-12">
+        <form action="index.php" method="post" class="col-12">
         <p><select name="chooseyear" >
         <?php
             for($i=date("Y"); $i>=1;$i--){
@@ -211,7 +211,12 @@
             <?php
 
                 for($i=12; $i>=1;$i--){
-                    echo "<option>";
+                    if($i==date('m')){
+
+                        echo "<option selected>";
+                    }else{
+                        echo "<option>";
+                    }
                     echo "$i";
                 }
                     echo "</option>";
@@ -225,10 +230,10 @@
             <!-- 上下月表單 -->
         <div class="row justify-content-around">
         <div class='col-auto' >
-            <a href="calendar.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>" class="btn btn-primary btn-sm">上個月</a>
+            <a href="index.php?month=<?=$lastMonth;?>&year=<?=$lastYear;?>" class="btn btn-primary btn-sm">上個月</a>
             </div>
             <div class='col-auto' >
-            <a href="calendar.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>" class="btn btn-primary btn-sm">下個月</a>
+            <a href="index.php?month=<?=$nextMonth;?>&year=<?=$nextYear;?>" class="btn btn-primary btn-sm">下個月</a>
             </div>
         </div>
 <table class="col-12 " >
